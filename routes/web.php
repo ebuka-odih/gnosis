@@ -30,7 +30,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::group(['middleware' => ['auth'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
+Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/dd', [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('order', OrderController::class);
