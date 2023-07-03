@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->decimal('price', 11, 2);
             $table->string('size')->nullable();
-            $table->bigInteger('categories_id')->nullable();
+            $table->string('type')->nullable();
+            $table->integer('stock')->default(1);
         });
     }
 
