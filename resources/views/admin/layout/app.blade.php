@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="author" content="Softnio">
+    <meta name="author" content="Gnosis">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
     <!-- Fav Icon  -->
@@ -152,7 +152,17 @@
                                         </div>
                                         <div class="dropdown-inner">
                                             <ul class="link-list">
-                                                <li><a href="#"><em class="icon ni ni-signout"></em><span>Sign out</span></a></li>
+                                                <li>
+                                                    <form method="POST" action="{{ route('logout') }}">
+                                                        @csrf
+
+                                                        <x-dropdown-link :href="route('logout')"
+                                                                         onclick="event.preventDefault();
+                                                                            this.closest('form').submit();">
+                                                            <em class="icon ni ni-signout"></em><span>Sign out</span>
+                                                        </x-dropdown-link>
+                                                    </form>
+                                                </li>
                                             </ul>
                                         </div>
                                     </div>
