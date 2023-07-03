@@ -17,10 +17,7 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+//Route::view('welcome', 'welcome')->name('welcome');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,9 +26,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
+Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
-    Route::get('/dd', [AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::resource('order', OrderController::class);
     Route::resource('product', ProductController::class);

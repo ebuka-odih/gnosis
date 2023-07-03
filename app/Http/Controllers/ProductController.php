@@ -54,6 +54,12 @@ class ProductController extends Controller
         return redirect()->back()->with('success', "Item Added Successfully");
     }
 
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('admin.product.edit', compact('product'));
+    }
+
     protected function getData(Request $request)
     {
         $rules = [
