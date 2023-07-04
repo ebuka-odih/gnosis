@@ -54,21 +54,53 @@ class ProductController extends Controller
         return redirect()->back()->with('success', "Item Added Successfully");
     }
 
+    public function show($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('admin.product.view', compact('product'));
+    }
+
     public function edit($id)
     {
         $product = Product::findOrFail($id);
         return view('admin.product.edit', compact('product'));
     }
 
+    public function update(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $input['imagename'] = time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('/files');
+            $image->move($destinationPath, $input['imagename']);
+
+            $product->update(['image' => $input['imagename']]);
+            $data = $this->getData($request);
+            $product->update($data);
+            return redirect()->route('admin.product.index')->with('updated', 'Product updated ');
+        }
+         $product->update($this->getData($request));
+        return redirect()->route('admin.product.index')->with('updated', 'Product updated ');
+    }
+
     protected function getData(Request $request)
     {
         $rules = [
-            'name' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:5048',
-            'price' => 'required',
+            'name' => 'nullable',
+            'price' => 'nullable',
             'size' => 'nullable',
-            'categories_id' => 'required',
+            'type' => 'nullable',
+            'stock' => 'nullable',
         ];
         return $request->validate($rules);
     }
+
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->delete();
+        return redirect()->back()->with('deleted', "Item deleted");
+    }
+
 }

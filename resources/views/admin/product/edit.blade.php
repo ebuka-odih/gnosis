@@ -5,119 +5,114 @@
         <div class="container-fluid">
             <div class="nk-content-inner">
                 <div class="nk-content-body">
-                    <div class="nk-block-head nk-block-head-sm">
-                        <div class="nk-block-between">
+                    <div class="components-preview wide-md mx-auto">
+                        <div class="nk-block-head nk-block-head-lg wide-sm">
                             <div class="nk-block-head-content">
-                                <h4 class="nk-block-title page-title">Dashboard</h4>
-                            </div><!-- .nk-block-head-content -->
-                        </div><!-- .nk-block-between -->
-                    </div><!-- .nk-block-head -->
-                    <div class="nk-block">
-                        <div class="nk-block nk-block-lg" data-select2-id="13">
-                            <div class="nk-block-head">
-                                <div class="nk-block-head-content">
-                                    <h4 class="title nk-block-title">Form Outlined</h4>
-                                    <div class="nk-block-des">
-                                        <p>Textual form controls—like <code class="code-tag">&lt;input&gt;</code>s, <code class="code-tag">&lt;select&gt;</code>s, and <code class="code-tag">&lt;textarea&gt;</code>s—are styled with the <code>.form-control</code> class. Included are styles for general appearance, focus state, sizing, and more. Additional classes can be used to vary this layout on a per-form basis.</p>
-                                    </div>
-                                </div>
+                                <div class="nk-block-head-sub"><a class="back-to" href="{{ route('admin.product.index') }}"><em class="icon ni ni-arrow-left"></em><span>Products</span></a></div>
+                                <h2 class="nk-block-title fw-normal">Edit Product</h2>
+
                             </div>
+                        </div><!-- .nk-block-head -->
+                        <div class="nk-block nk-block-lg">
+
                             <div class="card card-bordered card-preview">
                                 <div class="card-inner">
-                                    <div class="preview-block" data-select2-id="12">
-                                        <span class="preview-title-lg overline-title">Outlined Preview</span>
-                                        <div class="row gy-4">
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div class="form-group">
-                                                    <div class="form-control-wrap">
-                                                        <input type="text" class="form-control form-control-xl form-control-outlined" id="outlined-normal">
-                                                        <label class="form-label-outlined" for="outlined-normal">Input text outlined</label>
-                                                    </div>
+                                    <div class="preview-block">
+
+                                        <form action="{{ route('admin.product.update', $product->id) }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            @if ($errors->any())
+                                                <div class="alert alert-danger">
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{ $error }}</li>
+                                                        @endforeach
+                                                    </ul>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div class="form-group">
-                                                    <div class="form-control-wrap">
-                                                        <div class="form-icon form-icon-right xl">
-                                                            <em class="icon ni ni-user"></em>
+                                            @endif
+                                            <div class="row gy-4">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="default-01">Product Name</label>
+                                                        <div class="form-control-wrap">
+                                                            <input type="text" name="name" value="{{ old('name', optional($product)->name) }}" class="form-control form-control-lg" id="default-01" >
                                                         </div>
-                                                        <input type="text" class="form-control form-control-xl form-control-outlined" id="outlined-right-icon">
-                                                        <label class="form-label-outlined" for="outlined-right-icon">Input with icon</label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div class="form-group">
-                                                    <div class="form-control-wrap">
-                                                        <select class="form-select js-select2 select2-hidden-accessible" data-ui="xl" id="outlined-select" data-select2-id="outlined-select" tabindex="-1" aria-hidden="true">
-                                                            <option value="default_option" data-select2-id="2">Default Option</option>
-                                                            <option value="option_select_name" data-select2-id="23">Option select name</option>
-                                                            <option value="option_select_name" data-select2-id="24">Option select name</option>
-                                                        </select><span class="select2 select2-container select2-container--default select2-xl select2-container--below" dir="ltr" data-select2-id="1" style="width: 287.328px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-disabled="false" aria-labelledby="select2-outlined-select-container"><span class="select2-selection__rendered" id="select2-outlined-select-container" role="textbox" aria-readonly="true" title="Option select name">Option select name</span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
-                                                        <label class="form-label-outlined" for="outlined-select">Outlined Select</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div class="form-group">
-                                                    <div class="form-control-wrap">
-                                                        <div class="form-icon form-icon-right xl">
-                                                            <em class="icon ni ni-calendar-alt"></em>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="default-05">Price</label>
+                                                        <div class="form-control-wrap">
+                                                            <div class="form-text-hint">
+                                                                <span class="overline-title">NGN</span>
+                                                            </div>
+                                                            <input type="number" name="price" value="{{ old('price', optional($product)->price) }}" class="form-control form-control-lg" id="default-05">
                                                         </div>
-                                                        <input type="text" class="form-control form-control-xl form-control-outlined date-picker" id="outlined-date-picker">
-                                                        <label class="form-label-outlined" for="outlined-date-picker">Date Picker</label>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div class="form-group">
-                                                    <div class="form-control-wrap has-timepicker">
-                                                        <div class="form-icon form-icon-right xl">
-                                                            <em class="icon ni ni-clock"></em>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="size">Size</label>
+                                                        <div class="form-control-wrap">
+                                                            <select name="size" id="size" class="form-control form-control-lg">
+                                                                <option >Choose Size</option>
+                                                                <option value="Large" @if(old('size', optional($product)->size) == "Large") selected @endif>L</option>
+                                                                <option value="XL" @if(old('size', optional($product)->size) == "XL") selected @endif>XL</option>
+                                                                <option value="XXL" @if(old('size', optional($product)->size) == "XXL") selected @endif>XXL</option>
+                                                                <option value="XXXL" @if(old('size', optional($product)->size) == "XXXL") selected @endif>XXXL</option>
+                                                            </select>
                                                         </div>
-                                                        <input type="text" class="form-control form-control-xl form-control-outlined time-picker" id="outlined-time-picker">
-                                                        <label class="form-label-outlined" for="outlined-time-picker">Time Picker</label>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="type">Size</label>
+                                                        <div class="form-control-wrap">
+                                                            <select name="type" id="type" class="form-control form-control-lg">
+                                                                <option >Choose Size</option>
+                                                                <option value="Shirt" @if(old('type', optional($product)->type) == "Shirt") selected @endif>Shirt</option>
+                                                                <option value="Short" @if(old('type', optional($product)->type) == "Short") selected @endif>Short</option>
+                                                                <option value="Sleeve" @if(old('type', optional($product)->type) == "Sleeve") selected @endif>Sleeve</option>
+                                                                <option value="Pants" @if(old('type', optional($product)->type) == "Pants") selected @endif>Pants</option>
+                                                            </select>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <hr class="preview-hr">
-                                        <span class="preview-title-lg overline-title">Outlined Sizes</span>
-                                        <div class="row gy-4">
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div class="form-group">
-                                                    <div class="form-control-wrap">
-                                                        <input type="text" class="form-control form-control-xl form-control-outlined" id="outlined-xl">
-                                                        <label class="form-label-outlined" for="outlined-xl">Input text xl</label>
+
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="default-06">Stock</label>
+                                                        <div class="form-control-wrap ">
+                                                                <input type="text" id="default-06" name="stock" value="{{ old('stock', optional($product)->stock) }}" class="form-control form-control-lg">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="default-06">Product Image</label>
+                                                        <div class="form-control-wrap">
+                                                            <div class="form-file mb-3">
+                                                                <input type="file" multiple="" name="image" class="form-file-input" id="customFile">
+                                                                <label class="form-file-label" for="customFile">Choose file</label>
+                                                            </div>
+                                                            <span class="tb-product">
+                                                            <img height="200" width="150" src="{{ asset('files/'.$product->image) }}" alt="" class="thumb">
+                                                        </span>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div class="form-group">
-                                                    <div class="form-control-wrap">
-                                                        <input type="text" class="form-control form-control-lg form-control-outlined" id="outlined-lg">
-                                                        <label class="form-label-outlined" for="outlined-lg">Input text lg</label>
-                                                    </div>
+                                                <div class="col-sm-6">
+                                                        <button type="submit" class="btn btn-primary">Update Product</button>
                                                 </div>
+
                                             </div>
-                                            <div class="col-lg-4 col-sm-6">
-                                                <div class="form-group">
-                                                    <div class="form-control-wrap">
-                                                        <input type="text" class="form-control form-control-outlined" id="outlined-default">
-                                                        <label class="form-label-outlined" for="outlined-default">Input text</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-12">
-                                                <p class="text-soft">Use <code>.form-control-outlined</code> with <code>.form-control</code> for outlined form element and replace <code>.form-label</code> with <code>.form-label-outlined</code>, also place label after input/select element.</p>
-                                            </div>
-                                        </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div><!-- .card-preview -->
 
-                        </div>
-                    </div><!-- .nk-block -->
+                        </div><!-- .nk-block -->
+
+
+                    </div><!-- .components-preview -->
                 </div>
             </div>
         </div>

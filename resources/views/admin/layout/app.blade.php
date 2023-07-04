@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="A powerful and conceptual apps base dashboard template that especially build for developers and programmers.">
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="./images/favicon.png">
+    <link rel="shortcut icon" href="{{ asset('img/small-logo.png') }}">
     <!-- Page Title  -->
     <title>{{ env('APP_NAME') }} | Dashboard</title>
     <!-- StyleSheets  -->
@@ -75,19 +75,13 @@
                                     <span class="nk-menu-text">Settings</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
-                            <li class="nk-menu-item">
-                                <a href="html/ecommerce/integration.html" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-server-fill"></em></span>
-                                    <span class="nk-menu-text">Integration</span>
-                                </a>
-                            </li><!-- .nk-menu-item -->
                             <li class="nk-menu-heading">
-                                <h6 class="overline-title text-primary-alt">Return to</h6>
+                                <h6 class="overline-title text-primary-alt">Goto</h6>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item">
-                                <a href="html/index.html" class="nk-menu-link">
+                                <a href="https://gnosis.fit/" target="_blank" class="nk-menu-link">
                                     <span class="nk-menu-icon"><em class="icon ni ni-dashlite-alt"></em></span>
-                                    <span class="nk-menu-text">Main Dashboard</span>
+                                    <span class="nk-menu-text">Main Site</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
 
@@ -182,13 +176,6 @@
                     <div class="nk-footer-wrap">
                         <div class="nk-footer-copyright"> &copy; {{ Date('Y')}} {{ env('APP_NAME') }}.
                         </div>
-                        <div class="nk-footer-links">
-                            <ul class="nav nav-sm">
-                                <li class="nav-item">
-                                    <a data-bs-toggle="modal" href="#region" class="nav-link"><em class="icon ni ni-globe"></em><span class="ms-1">Select Region</span></a>
-                                </li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -204,6 +191,7 @@
 <!-- JavaScript -->
 <script src="{{ asset('assets/js/bundle.js?ver=3.1.1') }}"></script>
 <script src="{{ asset('assets/js/scripts.js?ver=3.1.1') }}"></script>
+<script src="{{ asset('assets/js/libs/datatable-btns.js?ver=3.1.1') }}"></script>
 <script src="{{ asset('assets/js/charts/chart-ecommerce.js?ver=3.1.1') }}"></script>
 </body>
 
