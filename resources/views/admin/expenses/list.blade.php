@@ -17,6 +17,23 @@
                         </div><!-- .nk-block-between -->
                     </div><!-- .nk-block-head -->
                     <div class="nk-block">
+                        <div class="container m-4">
+                            @if(session()->has('deleted'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('deleted') }}
+                                </div>
+                            @endif
+                            @if(session()->has('updated'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('updated') }}
+                                </div>
+                            @endif
+                            @if(session()->has('created'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('created') }}
+                                </div>
+                            @endif
+                        </div>
                         <div class="col-xxl-12 col-md-12">
                             <div class="card is-dark h-100">
                                 <div class="nk-ecwg nk-ecwg1">
@@ -44,22 +61,11 @@
                                 </div><!-- .nk-ecwg -->
                             </div><!-- .card -->
                         </div>
-                        <div class="container">
-                            @if(session()->has('deleted'))
-                                <div class="alert alert-success">
-                                    {{ session()->get('deleted') }}
-                                </div>
-                            @endif
-                            @if(session()->has('updated'))
-                                <div class="alert alert-success">
-                                    {{ session()->get('updated') }}
-                                </div>
-                            @endif
-                        </div>
+
                         <div id="DataTables_Table_2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
 
                             <div class="my-3">
-                                <table class="datatable-init nowrap nk-tb-list is-separate dataTable no-footer" data-auto-responsive="false" id="DataTables_Table_2" aria-describedby="DataTables_Table_2_info">
+                                <table class=" datatable-init-export nowrap table dataTable no-footer dtr-inline" data-auto-responsive="false" id="DataTables_Table_2" aria-describedby="DataTables_Table_2_info">
                                     <thead>
                                     <tr class="nk-tb-item nk-tb-head">
                                         <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending">
@@ -111,27 +117,21 @@
                                                             <div class="dropdown-menu dropdown-menu-end">
                                                                 <ul class="link-list-opt no-bdr">
                                                                     <li>
-                                                                        <a href="{{ route('admin.product.edit', $item->id) }}">
+                                                                        <a href="{{ route('admin.expenses.edit', $item->id) }}">
                                                                             <em class="icon ni ni-edit"></em>
-                                                                            <span>Edit Product</span>
+                                                                            <span>Edit Expenses</span>
                                                                         </a>
                                                                     </li>
                                                                     <li>
-                                                                        <a href="{{ route('admin.product.show', $item->id) }}">
-                                                                            <em class="icon ni ni-eye"></em>
-                                                                            <span>View Product</span>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <form method="POST" action="{!! route('admin.product.destroy', $item->id) !!}" accept-charset="UTF-8">
+                                                                        <form method="POST" action="{!! route('admin.expenses.destroy', $item->id) !!}" accept-charset="UTF-8">
                                                                             <input name="_method" value="DELETE" type="hidden">
                                                                             {{ csrf_field() }}
 
                                                                             <div class="btn-group btn-group-xs pull-right" role="group">
 
-                                                                                <button type="submit" class="btn btn-danger  js-bs-tooltip-enabled" data-bs-toggle="tooltip" data-bs-original-title="Delete" onclick="return confirm(&quot;Delete Product?&quot;)">
+                                                                                <button type="submit" class="btn btn-danger  js-bs-tooltip-enabled" data-bs-toggle="tooltip" data-bs-original-title="Delete" onclick="return confirm(&quot;Delete Expenses?&quot;)">
                                                                                     <em class="icon ni ni-trash"></em>
-                                                                                    <span class="text-white">Remove Product</span>
+                                                                                    <span class="text-white">Remove Expenses</span>
                                                                                 </button>
                                                                             </div>
 
