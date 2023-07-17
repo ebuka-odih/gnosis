@@ -33,12 +33,7 @@
                     </div>
                     <div class="card card-bordered">
                         <div class="card-inner card-inner-lg">
-                            <div class="nk-block-head">
-                                <div class="nk-block-head-content">
-                                    <h4 class="nk-block-title">Sign-In</h4>
 
-                                </div>
-                            </div>
                             <form action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <div class="form-group">

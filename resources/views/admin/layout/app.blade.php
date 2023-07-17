@@ -64,9 +64,9 @@
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item">
-                                <a href="html/ecommerce/supports.html" class="nk-menu-link">
-                                    <span class="nk-menu-icon"><em class="icon ni ni-chat-fill"></em></span>
-                                    <span class="nk-menu-text">Supports</span>
+                                <a href="{{ route('admin.expenses.index') }}" class="nk-menu-link">
+                                    <span class="nk-menu-icon"><em class="icon ni ni-money"></em></span>
+                                    <span class="nk-menu-text">Expenses</span>
                                 </a>
                             </li><!-- .nk-menu-item -->
                             <li class="nk-menu-item">
@@ -106,10 +106,7 @@
                                 <img class="logo-dark logo-img" src="{{ asset('img/logo.png') }}" srcset="{{ asset('img/logo.png') }} 2x" alt="logo-dark">
                             </a>
                         </div><!-- .nk-header-brand -->
-                        <div class="nk-header-search ms-3 ms-xl-0">
-                            <em class="icon ni ni-search"></em>
-                            <input type="text" class="form-control border-transparent form-focus-none" placeholder="Search anything">
-                        </div><!-- .nk-header-news -->
+
                         <div class="nk-header-tools">
                             <ul class="nk-quick-nav">
 
