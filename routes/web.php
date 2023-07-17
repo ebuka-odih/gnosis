@@ -31,7 +31,7 @@ Route::get('/', [AdminController::class, 'dashboard'])->middleware(['auth', 'ver
 Route::group(['middleware' => ['auth', 'verified'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
-    Route::resource('order', OrderController::class);
+    Route::resource('orders', OrderController::class);
     Route::resource('product', ProductController::class);
     Route::resource('expenses', ExpenseController::class);
 

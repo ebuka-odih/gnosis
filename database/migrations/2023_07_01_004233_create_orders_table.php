@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('production_date')->nullable();
             $table->string('delivery_date')->nullable();
             $table->string('customer')->nullable();
+            $table->integer('quantity')->nullable();
+            $table->longText('description')->nullable();
             $table->integer('status')->default(0);
             $table->decimal('amount', 11, 2)->default(0);
         });

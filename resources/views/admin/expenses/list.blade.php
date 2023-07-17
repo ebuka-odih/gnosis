@@ -99,7 +99,6 @@
                                             <td class="nk-tb-col tb-col-sm">
                                                 <span class="title">{{ $item->label }}</span>
                                             </td>
-
                                             <td class="nk-tb-col">
                                                 <span class="tb-lead">₦ @money($item->amount)</span>
                                             </td>
