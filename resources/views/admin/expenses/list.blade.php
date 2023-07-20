@@ -79,7 +79,7 @@
                                             <span>Amount</span>
                                         </th>
                                         <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
-                                            <span>Description</span>
+                                            <span>Note</span>
                                         </th>
 
                                         <th style="text-align: right" class="nk-tb-col tb-col-md sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending">
@@ -103,7 +103,7 @@
                                                 <span class="tb-lead">₦ @money($item->amount)</span>
                                             </td>
                                             <td class="nk-tb-col">
-                                                <span class="tb-lead">{{ $item->description }}</span>
+                                                <span class="tb-lead">{{ $item->note }}</span>
                                             </td>
 
                                             <td class="nk-tb-col nk-tb-col-tools">
@@ -194,9 +194,9 @@
 
                                                         <div class="col-mb-6">
                                                             <div class="form-group">
-                                                                <label class="form-label" for="description">Description</label>
+                                                                <label class="form-label" for="description">Note</label>
                                                                 <div class="form-control-wrap">
-                                                                    <textarea class="form-control" name="description" id="description" cols="30"
+                                                                    <textarea class="form-control" name="note" id="description" cols="30"
                                                                               rows="10"></textarea>
                                                                 </div>
                                                             </div>

@@ -2,216 +2,201 @@
 @section('content')
 
 <div class="nk-content ">
-    <div class="container-fluid">
-        <div class="nk-content-inner">
-            <div class="nk-content-body">
-                <div class="nk-block-head nk-block-head-sm">
-                    <div class="nk-block-between">
-                        <div class="nk-block-head-content">
-                            <h3 class="nk-block-title page-title">Orders</h3>
-                        </div><!-- .nk-block-head-content -->
-                        <div class="nk-block-head-content">
-                            <div class="toggle-wrap nk-block-tools-toggle">
-                                <a href="#" class="btn btn-icon btn-trigger toggle-expand me-n1" data-bs-toggle="modal" data-bs-target="#modalForm" ><em class="icon ni ni-more-v"></em></a>
-                                <div class="toggle-expand-content" data-content="pageMenu">
-                                    <ul class="nk-block-tools g-3">
-                                        <li>
-                                            <div class="form-control-wrap">
-                                                <div class="form-icon form-icon-right">
-                                                    <em class="icon ni ni-search"></em>
-                                                </div>
-                                                <input type="text" class="form-control" id="default-04" placeholder="Quick search by id">
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="drodown">
-                                                <a href="#" class="dropdown-toggle dropdown-indicator btn btn-outline-light btn-white" data-bs-toggle="dropdown">Status</a>
-                                                <div class="dropdown-menu dropdown-menu-end">
-                                                    <ul class="link-list-opt no-bdr">
-                                                        <li><a href="#"><span>On Hold</span></a></li>
-                                                        <li><a href="#"><span>Delevired</span></a></li>
-                                                        <li><a href="#"><span>Rejected</span></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="nk-block-tools-opt">
-                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalForm"><em class="icon ni ni-plus"></em><span>Add Order</span></button>
-
-                                            <a href="#" class="btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
-{{--                                            <a href="#" class="btn btn-primary d-none d-md-inline-flex"><em class="icon ni ni-plus"></em><span>Add Order</span></a>--}}
-                                        </li>
+        <div class="container-fluid">
+            <div class="nk-content-inner">
+                <div class="nk-content-body">
+                    <div class="nk-block-head nk-block-head-sm">
+                        <div class="nk-block-between">
+                            <div class="nk-block-head-content">
+                                <h3 class="nk-block-title page-title">Orders</h3>
+                            </div><!-- .nk-block-head-content -->
+                            <div class="nk-block-tools-opt">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#modalForm" class="toggle btn btn-icon btn-primary d-md-none"><em class="icon ni ni-plus"></em></a>
+                                <button type="button" class="toggle btn btn-primary d-none d-md-inline-flex" data-bs-toggle="modal" data-bs-target="#modalForm"><em class="icon ni ni-plus"></em><span>Add Order</span></button>
+                            </div>
+                        </div><!-- .nk-block-between -->
+                    </div><!-- .nk-block-head -->
+                    <div class="nk-block">
+                        <div class="container m-4">
+                            @if(session()->has('deleted'))
+                                <div class="alert alert-danger">
+                                    {{ session()->get('deleted') }}
+                                </div>
+                            @endif
+                            @if(session()->has('updated'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('updated') }}
+                                </div>
+                            @endif
+                            @if(session()->has('created'))
+                                <div class="alert alert-success">
+                                    {{ session()->get('created') }}
+                                </div>
+                            @endif
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
                                     </ul>
                                 </div>
-                            </div>
-                        </div><!-- .nk-block-head-content -->
-                    </div><!-- .nk-block-between -->
-                </div><!-- .nk-block-head -->
-                <div class="nk-block">
-                    <div class="nk-tb-list is-separate is-medium mb-3">
-                        <div class="nk-tb-item nk-tb-head">
-                            <div class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="oid">
-                                    <label class="custom-control-label" for="oid"></label>
-                                </div>
-                            </div>
-                            <div class="nk-tb-col"><span>Order</span></div>
-                            <div class="nk-tb-col tb-col-md"><span>Date</span></div>
-                            <div class="nk-tb-col"><span class="d-none d-sm-block">Status</span></div>
-                            <div class="nk-tb-col tb-col-sm"><span>Customer</span></div>
-                            <div class="nk-tb-col tb-col-md"><span>Purchased</span></div>
-                            <div class="nk-tb-col"><span>Total</span></div>
-                            <div class="nk-tb-col nk-tb-col-tools">
-                                <ul class="nk-tb-actions gx-1 my-n1">
-                                    <li>
-                                        <div class="drodown">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger me-n1" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-edit"></em><span>Update Status</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-truck"></em><span>Mark as Delivered</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-money"></em><span>Mark as Paid</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-report-profit"></em><span>Send Invoice</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Orders</span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div><!-- .nk-tb-item -->
+                            @endif
 
-                        <div class="nk-tb-item">
-                            <div class="nk-tb-col nk-tb-col-check">
-                                <div class="custom-control custom-control-sm custom-checkbox notext">
-                                    <input type="checkbox" class="custom-control-input" id="oid08">
-                                    <label class="custom-control-label" for="oid08"></label>
-                                </div>
-                            </div>
-                            <div class="nk-tb-col">
-                                <span class="tb-lead"><a href="#">#95996</a></span>
-                            </div>
-                            <div class="nk-tb-col tb-col-md">
-                                <span class="tb-sub">May 24, 2020</span>
-                            </div>
-                            <div class="nk-tb-col">
-                                <span class="dot bg-warning d-sm-none"></span>
-                                <span class="badge badge-sm badge-dot has-bg bg-warning d-none d-sm-inline-flex">On Hold</span>
-                            </div>
-                            <div class="nk-tb-col tb-col-sm">
-                                <span class="tb-sub">Emma Walker</span>
-                            </div>
-                            <div class="nk-tb-col tb-col-md">
-                                <span class="tb-sub text-primary">Smartwatch</span>
-                            </div>
-                            <div class="nk-tb-col">
-                                <span class="tb-lead">$ 129.49</span>
-                            </div>
-                            <div class="nk-tb-col nk-tb-col-tools">
-                                <ul class="nk-tb-actions gx-1">
-                                    <li class="nk-tb-action-hidden"><a href="#" class="btn btn-icon btn-trigger btn-tooltip" aria-label="Mark as Delivered" data-bs-original-title="Mark as Delivered">
-                                            <em class="icon ni ni-truck"></em></a></li>
-                                    <li class="nk-tb-action-hidden"><a href="#" class="btn btn-icon btn-trigger btn-tooltip" aria-label="View Order" data-bs-original-title="View Order">
-                                            <em class="icon ni ni-eye"></em></a></li>
-                                    <li>
-                                    </li><li>
-                                        <div class="drodown me-n1">
-                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown"><em class="icon ni ni-more-h"></em></a>
-                                            <div class="dropdown-menu dropdown-menu-end">
-                                                <ul class="link-list-opt no-bdr">
-                                                    <li><a href="#"><em class="icon ni ni-eye"></em><span>Order Details</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-truck"></em><span>Mark as Delivered</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-money"></em><span>Mark as Paid</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-report-profit"></em><span>Send Invoice</span></a></li>
-                                                    <li><a href="#"><em class="icon ni ni-trash"></em><span>Remove Order</span></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div><!-- .nk-tb-item -->
-                    </div><!-- .nk-tb-list -->
-                    <div class="card">
-                        <div class="card-inner">
-                            <div class="nk-block-between-md g-3">
-
-                            </div>
-                            <!-- .nk-block-between -->
                         </div>
-                    </div>
-                </div><!-- .nk-block -->
+
+                        <div id="DataTables_Table_2_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+                            <div class="my-3">
+                                <table class=" datatable-init-export nowrap table dataTable no-footer dtr-inline" data-auto-responsive="false" id="DataTables_Table_2" aria-describedby="DataTables_Table_2_info">
+                                    <thead>
+                                    <tr class="nk-tb-item nk-tb-head">
+                                        <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending">
+                                            <span>Date</span>
+                                        </th>
+                                        <th class="nk-tb-col tb-col-sm sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
+                                            <span>Product (Qt)</span>
+                                        </th>
+                                        <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
+                                            <span>Amount</span>
+                                        </th>
+                                        <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
+                                            <span>Description</span>
+                                        </th>
+
+                                        <th style="text-align: right" class="nk-tb-col tb-col-md sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending">
+                                            <span>Action</span>
+                                        </th>
+
+                                    </tr>
+                                    <!-- .nk-tb-item -->
+                                    </thead>
+                                    <tbody>
+                                    @foreach($orders as $item)
+
+                                        <tr class="nk-tb-item even">
+                                            <td class="nk-tb-col">
+                                                <span class="tb-sub">{{ date('d M, Y', strtotime($item->created_at)) }}</span>
+                                            </td>
+                                            <td class="nk-tb-col tb-col-sm">
+                                                <span class="title">{{ $item->product->name }} ({{ $item->quantity }})</span>
+                                            </td>
+                                            <td class="nk-tb-col">
+                                                <span class="tb-lead">₦ @money($item->amount)</span>
+                                            </td>
+                                            <td class="nk-tb-col">
+                                                <span class="tb-lead">{{ $item->description }}</span>
+                                            </td>
+
+                                            <td class="nk-tb-col nk-tb-col-tools">
+                                                <ul class="nk-tb-actions gx-1 my-n1">
+                                                    <li class="me-n1">
+                                                        <div class="dropdown">
+                                                            <a href="#" class="dropdown-toggle btn btn-icon btn-trigger" data-bs-toggle="dropdown">
+                                                                <em class="icon ni ni-more-h"></em>
+                                                            </a>
+                                                            <div class="dropdown-menu dropdown-menu-end">
+                                                                <ul class="link-list-opt no-bdr">
+                                                                    <li>
+                                                                        <a href="{{ route('admin.expenses.edit', $item->id) }}">
+                                                                            <em class="icon ni ni-edit"></em>
+                                                                            <span>Edit Expenses</span>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li>
+                                                                        <form method="POST" action="{!! route('admin.expenses.destroy', $item->id) !!}" accept-charset="UTF-8">
+                                                                            <input name="_method" value="DELETE" type="hidden">
+                                                                            {{ csrf_field() }}
+
+                                                                            <div class="btn-group btn-group-xs pull-right" role="group">
+
+                                                                                <button type="submit" class="btn btn-danger  js-bs-tooltip-enabled" data-bs-toggle="tooltip" data-bs-original-title="Delete" onclick="return confirm(&quot;Delete Expenses?&quot;)">
+                                                                                    <em class="icon ni ni-trash"></em>
+                                                                                    <span class="text-white">Remove Expenses</span>
+                                                                                </button>
+                                                                            </div>
+
+                                                                        </form>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+
+                    </div><!-- .nk-block -->
+
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 <div class="modal fade" id="modalForm">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Customer Info</h5>
+                <h5 class="modal-title">Order Info</h5>
                 <a href="#" class="close" data-bs-dismiss="modal" aria-label="Close">
                     <em class="icon ni ni-cross"></em>
                 </a>
             </div>
             <div class="modal-body">
-                <form action="#" class="form-validate is-alter" novalidate="novalidate">
+                <form action="{{ route('admin.orders.store') }}" method="POST" class="form-validate is-alter" novalidate="novalidate">
+                    @csrf
                     <div class="form-group">
-                        <label class="form-label" for="full-name">Full Name</label>
+                        <label class="form-label" for="product">Product Name</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="full-name" required="">
+                            <select name="products_id" id="product" class="form-control" required="">
+                                <option >Select Product</option>
+                                @foreach($products as $item)
+                                    <option value="{{ $item->id }}">{{ $item->name }} (₦{{ $item->price }})</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="email-address">Email address</label>
+                        <label class="form-label" for="customer">Quantity</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="email-address" required="">
+                            <input type="number" name="quantity" class="form-control" id="customer" value="1">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="customer">Customer Name</label>
+                        <div class="form-control-wrap">
+                            <input type="text" name="customer" class="form-control" id="customer" required="">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="phone-no">Phone No</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="phone-no">
+                            <input type="text" name="phone" class="form-control" id="phone-no">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="form-label">Communication</label>
-                        <ul class="custom-control-group g-3 align-center">
-                            <li>
-                                <div class="custom-control custom-control-sm custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="com-email">
-                                    <label class="custom-control-label" for="com-email">Email</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-control-sm custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="com-sms">
-                                    <label class="custom-control-label" for="com-sms">SMS</label>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="custom-control custom-control-sm custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="com-phone">
-                                    <label class="custom-control-label" for="com-phone">Phone</label>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" for="pay-amount">Amount</label>
+                        <label class="form-label" for="address">Address</label>
                         <div class="form-control-wrap">
-                            <input type="text" class="form-control" id="pay-amount">
+                            <input type="text" name="address" class="form-control" id="address">
                         </div>
                     </div>
                     <div class="form-group">
-                        <button type="submit" class="btn btn-lg btn-primary">Save Informations</button>
+                        <label class="form-label" for="note">Note</label>
+                        <div class="form-control-wrap">
+                            <textarea name="note" id="note" cols="30" rows="10" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-primary">Save</button>
                     </div>
                 </form>
-            </div>
-            <div class="modal-footer bg-light">
-                <span class="sub-text">Modal Footer Text</span>
             </div>
         </div>
     </div>

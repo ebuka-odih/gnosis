@@ -17,13 +17,15 @@ return new class extends Migration
             $table->id();
             $table->timestamps();
             $table->bigInteger('products_id');
-            $table->string('production_date')->nullable();
-            $table->string('delivery_date')->nullable();
-            $table->string('customer')->nullable();
-            $table->integer('quantity')->nullable();
-            $table->longText('description')->nullable();
+            $table->date('delivery_date')->nullable();
+            $table->integer('quantity')->nullable()->default(1);
+            $table->longText('note')->nullable();
             $table->integer('status')->default(0);
             $table->decimal('amount', 11, 2)->default(0);
+
+            $table->string('customer')->nullable();
+            $table->string('address')->nullable();
+            $table->string('phone')->nullable();
         });
     }
 

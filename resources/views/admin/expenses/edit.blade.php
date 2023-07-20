@@ -53,9 +53,9 @@
                                                 </div>
                                                 <div class="col-sm-12">
                                                     <div class="form-group">
-                                                        <label class="form-label" for="default-05">Description</label>
+                                                        <label class="form-label" for="default-05">Note</label>
                                                         <div class="form-control-wrap">
-                                                            <textarea name="description" id="" cols="30" rows="10" class="form-control">{{ old('description', optional($expenses)->description) }}</textarea>
+                                                            <textarea name="note" id="" cols="30" rows="10" class="form-control">{{ old('note', optional($expenses)->note) }}</textarea>
                                                         </div>
                                                     </div>
                                                 </div>

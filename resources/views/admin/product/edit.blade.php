@@ -19,7 +19,7 @@
                                 <div class="card-inner">
                                     <div class="preview-block">
 
-                                        <form action="{{ route('admin.product.update', $product->id) }}" method="POST">
+                                        <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PATCH')
                                             @if ($errors->any())

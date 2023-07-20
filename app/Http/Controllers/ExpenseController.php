@@ -36,12 +36,12 @@ class ExpenseController extends Controller
         $request->validate([
             'label' => 'required',
             'amount' => 'required',
-            'description' => 'nullable'
+            'note' => 'nullable'
         ]);
         $expenses = new Expense();
         $expenses->label = $request->label;
         $expenses->amount = $request->amount;
-        $expenses->description = $request->description;
+        $expenses->note = $request->note;
         $expenses->save();
         return redirect()->back()->with('created', 'Expenses Created Successfully');
     }
@@ -65,7 +65,7 @@ class ExpenseController extends Controller
         $data = $request->validate([
             'label' => 'nullable',
             'amount' => 'nullable',
-            'description' => 'nullable'
+            'note' => 'nullable'
         ]);
         $expense = Expense::findOrFail($id);
         $expense->update($data);
