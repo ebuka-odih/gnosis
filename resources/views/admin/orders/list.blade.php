@@ -17,6 +17,41 @@
                         </div><!-- .nk-block-between -->
                     </div><!-- .nk-block-head -->
                     <div class="nk-block">
+                        <div class="row">
+                            <div class="col-xxl-12 col-md-12">
+                                <div class="card h-100">
+                                    <div class="nk-ecwg nk-ecwg2">
+                                        <div class="card-inner">
+                                            <div class="card-title-group mt-n1">
+                                                <div class="card-title">
+                                                    <h6 class="title">Total order</h6>
+                                                </div>
+
+                                            </div>
+                                            <div class="data">
+                                                <div class="data-group">
+                                                    <div class="amount">₦@money($sum_orders)</div>
+                                                </div>
+                                            </div>
+                                        </div><!-- .card-inner -->
+                                        <div class="card-inner pb-0">
+                                            <div class="card-title-group">
+                                                <div class="card-title">
+                                                    <h6 class="title">Orders over time</h6>
+                                                </div>
+                                            </div>
+                                            <div class="data">
+                                                <div class="data-group">
+                                                    <div class="amount">{{ $total_orders }}</div>
+                                                </div>
+                                            </div>
+                                        </div><!-- .card-inner -->
+                                    </div><!-- .nk-ecwg -->
+                                </div><!-- .card -->
+                            </div>
+                        </div>
+
+                        <br>
                         <div class="container m-4">
                             @if(session()->has('deleted'))
                                 <div class="alert alert-danger">
@@ -54,6 +89,9 @@
                                         <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending">
                                             <span>Date</span>
                                         </th>
+                                        <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
+                                            <span>Delivery Date (Days Left)</span>
+                                        </th>
                                         <th class="nk-tb-col tb-col-sm sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending">
                                             <span>Product (Qt)</span>
                                         </th>
@@ -61,8 +99,9 @@
                                             <span>Amount</span>
                                         </th>
                                         <th class="nk-tb-col sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Price: activate to sort column ascending">
-                                            <span>Description</span>
+                                            <span>Customer</span>
                                         </th>
+
 
                                         <th style="text-align: right" class="nk-tb-col tb-col-md sorting" tabindex="0" aria-controls="DataTables_Table_2" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending">
                                             <span>Action</span>
@@ -78,6 +117,9 @@
                                             <td class="nk-tb-col">
                                                 <span class="tb-sub">{{ date('d M, Y', strtotime($item->created_at)) }}</span>
                                             </td>
+                                            <td class="nk-tb-col">
+                                                <span class="tb-lead">{{ $item->delivery_date }} <span class="badge bg-primary">{{ $item->created_at->diffInDays($item->delivery_date) }}days</span></span>
+                                            </td>
                                             <td class="nk-tb-col tb-col-sm">
                                                 <span class="title">{{ $item->product->name }} ({{ $item->quantity }})</span>
                                             </td>
@@ -85,8 +127,9 @@
                                                 <span class="tb-lead">₦ @money($item->amount)</span>
                                             </td>
                                             <td class="nk-tb-col">
-                                                <span class="tb-lead">{{ $item->description }}</span>
+                                                <span class="tb-lead">{{ $item->customer }}</span>
                                             </td>
+
 
                                             <td class="nk-tb-col nk-tb-col-tools">
                                                 <ul class="nk-tb-actions gx-1 my-n1">
@@ -98,21 +141,21 @@
                                                             <div class="dropdown-menu dropdown-menu-end">
                                                                 <ul class="link-list-opt no-bdr">
                                                                     <li>
-                                                                        <a href="{{ route('admin.expenses.edit', $item->id) }}">
+                                                                        <a href="{{ route('admin.orders.edit', $item->id) }}">
                                                                             <em class="icon ni ni-edit"></em>
-                                                                            <span>Edit Expenses</span>
+                                                                            <span>Edit Order</span>
                                                                         </a>
                                                                     </li>
                                                                     <li>
-                                                                        <form method="POST" action="{!! route('admin.expenses.destroy', $item->id) !!}" accept-charset="UTF-8">
+                                                                        <form method="POST" action="{!! route('admin.orders.destroy', $item->id) !!}" accept-charset="UTF-8">
                                                                             <input name="_method" value="DELETE" type="hidden">
                                                                             {{ csrf_field() }}
 
                                                                             <div class="btn-group btn-group-xs pull-right" role="group">
 
-                                                                                <button type="submit" class="btn btn-danger  js-bs-tooltip-enabled" data-bs-toggle="tooltip" data-bs-original-title="Delete" onclick="return confirm(&quot;Delete Expenses?&quot;)">
+                                                                                <button type="submit" class="btn btn-danger  js-bs-tooltip-enabled" data-bs-toggle="tooltip" data-bs-original-title="Delete" onclick="return confirm(&quot;Delete Order?&quot;)">
                                                                                     <em class="icon ni ni-trash"></em>
-                                                                                    <span class="text-white">Remove Expenses</span>
+                                                                                    <span class="text-white">Remove Order</span>
                                                                                 </button>
                                                                             </div>
 

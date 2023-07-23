@@ -14,7 +14,10 @@ class OrderController extends Controller
     {
         $orders = Order::all();
         $products = Product::all();
-        return view('admin.orders.list', compact('orders', 'products'));
+        $total_orders = Order::count();
+        $sum_orders = Order::select('amount')->sum('amount');
+
+        return view('admin.orders.list', compact('orders', 'products', 'total_orders', 'sum_orders'));
     }
 
     public function create()
@@ -40,7 +43,7 @@ class OrderController extends Controller
         $order->phone = $request->phone;
         $order->address = $request->address;
         $date = Carbon::now();
-        $order->delivery_date = $date->addDays(5);
+        $order->delivery_date = $date->addDays(6);
         $order->save();
         $order->amount = $order->quantity * $order->product->price;
         $order->save();
